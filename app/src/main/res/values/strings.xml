@@ -1,0 +1,15 @@
+<resources>
+   <string name="app_name">Medicine Reminder</string>
+   <string name="delete">DELETE</string>
+   <string name="add">ADD</string>
+   <string name="add_photo">Add photo</string>
+   <string name="no_reminders">You did\'t set any reminder</string>
+   <string name="add_success">Reminder added</string>
+   <string name="deleted">Reminder deleted</string>
+   <string name="camera_error">Sorry! Your device doesn\'t support camera</string>
+   <!-- hints -->
+   <string name="name">Medicine name</string>
+   <string name="ex_date">Expiry date</string>
+   <string name="time">Number of times</string>
+
+</resources>

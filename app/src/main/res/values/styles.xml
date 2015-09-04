@@ -1,0 +1,35 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!--<item name="android:actionBarStyle">@style/MyActionBar</item>-->
+    </style>
+
+
+    <!--<style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+        <!--&lt;!&ndash; API 14 theme customizations can go here. &ndash;&gt;-->
+        <!--<item name="android:actionBarStyle">@style/MyActionBar</item>-->
+        <!--&lt;!&ndash; Support library compatibility &ndash;&gt;-->
+        <!--<item name="actionBarStyle">@style/MyActionBar</item>-->
+    <!--</style>-->
+
+    <!--<style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">-->
+        <!--<item name="android:background">@color/actionbar_color</item>-->
+        <!--&lt;!&ndash; Support library compatibility &ndash;&gt;-->
+        <!--<item name="background">@color/actionbar_color</item>-->
+
+        <!--<item name="android:titleTextStyle">@style/MyActionBarTitleText</item>-->
+
+        <!--&lt;!&ndash; Support library compatibility &ndash;&gt;-->
+        <!--<item name="titleTextStyle">@style/MyActionBarTitleText</item>-->
+    <!--</style>-->
+
+
+    <!--&lt;!&ndash; ActionBar title text &ndash;&gt;-->
+    <!--<style name="MyActionBarTitleText"-->
+        <!--parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">-->
+        <!--<item name="android:textColor">@android:color/white</item>-->
+        <!--&lt;!&ndash; The textColor property is backward compatible with the Support Library &ndash;&gt;-->
+    <!--</style>-->
+</resources>
