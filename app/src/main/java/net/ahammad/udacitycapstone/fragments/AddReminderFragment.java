@@ -109,6 +109,9 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
                 Database.getInstance(getActivity()).insertReminder(bean);
                 Toast.makeText(getActivity(), R.string.add_success, Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().popBackStack();
+            }else{
+                Toast.makeText(getActivity(),R.string.empty,Toast.LENGTH_LONG).show();
+
             }
         }else if (v==mExDate){
             mDatePicker.show();

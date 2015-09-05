@@ -104,7 +104,7 @@ public class MainFragment extends Fragment {
             holder.bg.setBackgroundColor(color);
             holder.title.setText(mData.get(position).getTitle());
             holder.exDate.setText(mData.get(position).getExDate());
-            holder.numberoftimes.setText(mData.get(position).getNumberOfTimes());
+            holder.numberoftimes.setText(getString(R.string.times,mData.get(position).getNumberOfTimes()));
         }
 
         @Override
