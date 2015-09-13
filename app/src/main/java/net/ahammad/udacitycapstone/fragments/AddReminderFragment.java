@@ -23,6 +23,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.Tracker;
+
+import net.ahammad.udacitycapstone.MainApp;
 import net.ahammad.udacitycapstone.R;
 import net.ahammad.udacitycapstone.util.Database;
 import net.ahammad.udacitycapstone.util.ReminderBean;
@@ -56,7 +59,7 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
     @Bind(R.id.noTimes)
     EditText mNoOfTimes;
 
-    @Bind(R.id.delete)
+    @Bind(R.id.add)
     Button mAdd;
 
     @Bind(R.id.add_photo)
@@ -66,6 +69,14 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
     ImageView mPreview;
 
     private DatePickerDialog mDatePicker;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        MainApp application = (MainApp) getActivity().getApplication();
+        Tracker mTracker = application.getDefaultTracker();
+        mTracker.setScreenName("Add Reminder");
+    }
 
     @Nullable
     @Override

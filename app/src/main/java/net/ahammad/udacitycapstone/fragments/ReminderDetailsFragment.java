@@ -14,6 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.analytics.Tracker;
+
+import net.ahammad.udacitycapstone.MainApp;
 import net.ahammad.udacitycapstone.R;
 import net.ahammad.udacitycapstone.util.Database;
 
@@ -47,6 +50,14 @@ public class ReminderDetailsFragment extends Fragment implements View.OnClickLis
 
     @Bind(R.id.imageView)
     ImageView mPreview;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        MainApp application = (MainApp) getActivity().getApplication();
+        Tracker mTracker = application.getDefaultTracker();
+        mTracker.setScreenName("Reminder details");
+    }
 
     @Nullable
     @Override

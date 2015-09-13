@@ -1,6 +1,7 @@
 package net.ahammad.udacitycapstone.fragments;
 
 import android.graphics.Color;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.Tracker;
+
+import net.ahammad.udacitycapstone.MainApp;
 import net.ahammad.udacitycapstone.R;
 import net.ahammad.udacitycapstone.util.BusProvider;
 import net.ahammad.udacitycapstone.util.Database;
@@ -43,6 +47,13 @@ public class MainFragment extends Fragment {
     public MainFragment() {
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        MainApp application = (MainApp) getActivity().getApplication();
+        Tracker mTracker = application.getDefaultTracker();
+        mTracker.setScreenName("Reminders");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
