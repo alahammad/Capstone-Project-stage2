@@ -18,6 +18,10 @@ public class Database {
         return realm;
     }
 
+    public  void setRealm(Realm realm){
+        this.realm = realm;
+    }
+
     public static Database getInstance (Context context){
         if (_instance ==null){
             _instance = new Database();

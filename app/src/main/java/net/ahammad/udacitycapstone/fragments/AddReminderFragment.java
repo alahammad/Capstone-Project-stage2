@@ -116,7 +116,8 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         if (v==mAdd) {
             if (checkEmpty(mTitle) && !TextUtils.isEmpty(mExDate.getText().toString()) && checkEmpty(mNoOfTimes)) {
-                ReminderBean bean = new ReminderBean(fileUri.getPath(), mTitle.getText().toString(), mExDate.getText().toString(),mNoOfTimes.getText().toString());
+                String imagePath = fileUri!=null ? fileUri.getPath() :"";
+                ReminderBean bean = new ReminderBean(imagePath, mTitle.getText().toString(), mExDate.getText().toString(),mNoOfTimes.getText().toString());
                 Database.getInstance(getActivity()).insertReminder(bean);
                 Toast.makeText(getActivity(), R.string.add_success, Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().popBackStack();
