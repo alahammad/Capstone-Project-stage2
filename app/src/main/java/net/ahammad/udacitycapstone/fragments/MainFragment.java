@@ -1,21 +1,16 @@
 package net.ahammad.udacitycapstone.fragments;
 
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.analytics.Tracker;
 
@@ -66,6 +61,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Database.getInstance(getActivity()).getRealm().setAutoRefresh(true);
         mData = Database.getInstance(getActivity()).getReminders();
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         mRecycleView.setLayoutManager(llm);

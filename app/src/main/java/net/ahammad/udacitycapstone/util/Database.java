@@ -14,6 +14,10 @@ public class Database {
     private static Database _instance;
     private static Realm realm;
 
+    public Realm getRealm(){
+        return realm;
+    }
+
     public static Database getInstance (Context context){
         if (_instance ==null){
             _instance = new Database();
