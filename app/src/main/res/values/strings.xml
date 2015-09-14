@@ -12,6 +12,7 @@
    <string name="medicine_image">Medicine Image</string>
    <string name="splash_txt">Medicine Reminder</string>
    <string name="my_location">My location</string>
+   <string name="save">Save</string>
    <!-- hints -->
    <string name="name">Medicine name</string>
    <string name="ex_date">Expiry date</string>
