@@ -11,9 +11,11 @@
    <string name="times">%s Times</string>
    <string name="medicine_image">Medicine Image</string>
    <string name="splash_txt">Medicine Reminder</string>
+   <string name="my_location">My location</string>
    <!-- hints -->
    <string name="name">Medicine name</string>
    <string name="ex_date">Expiry date</string>
    <string name="time">Number of times</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
