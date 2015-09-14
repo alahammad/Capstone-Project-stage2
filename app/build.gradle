@@ -28,6 +28,10 @@ android {
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
+            resValue "string", "google_maps_api_key", "AIzaSyClvRHJozaTZOvAn4hZLom8YXMfbxacS7c"
+        }
+        debug{
+            resValue "string", "google_maps_api_key", "AIzaSyClvRHJozaTZOvAn4hZLom8YXMfbxacS7c"
         }
     }
     packagingOptions {
