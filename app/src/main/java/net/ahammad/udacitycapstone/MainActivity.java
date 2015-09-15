@@ -1,17 +1,13 @@
 package net.ahammad.udacitycapstone;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.squareup.otto.Subscribe;
 
@@ -23,7 +19,6 @@ import net.ahammad.udacitycapstone.util.ReminderBean;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -47,7 +42,8 @@ public class MainActivity extends AppCompatActivity{
         // add condition to hidden add button
         mCurrentFragment = fragment;
         FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, fragment);
+        transaction.replace(R.id.container, fragment,fragment.getClass().getName());
+
         if (addToBackStack)transaction.addToBackStack(fragment.getClass().getName());
         transaction.commit();
 //        checkFragment(1);
@@ -63,6 +59,8 @@ public class MainActivity extends AppCompatActivity{
         bundle.putString(ReminderDetailsFragment.EX_DATE,item.getExDate());
         bundle.putString(ReminderDetailsFragment.NO_OF_TIMES,item.getNumberOfTimes());
         bundle.putString(ReminderDetailsFragment.IMAGE,item.getImagePath());
+        bundle.putDouble(ReminderDetailsFragment.LON, item.getLon());
+        bundle.putDouble(ReminderDetailsFragment.LAT,item.getLat());
         reminderDetailsFragment.setArguments(bundle);
         changeFragment(reminderDetailsFragment, true);
     }

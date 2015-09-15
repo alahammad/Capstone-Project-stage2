@@ -1,5 +1,6 @@
 package net.ahammad.udacitycapstone.fragments;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -13,17 +14,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.google.android.gms.analytics.Tracker;
 
 import net.ahammad.udacitycapstone.MainApp;
+import net.ahammad.udacitycapstone.MapsActivity;
 import net.ahammad.udacitycapstone.R;
 import net.ahammad.udacitycapstone.util.Database;
 
-import org.w3c.dom.Text;
+import java.text.DecimalFormat;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by alahammad on 9/4/15.
@@ -34,7 +36,8 @@ public class ReminderDetailsFragment extends Fragment implements View.OnClickLis
     public static final String EX_DATE = "ex_date";
     public static final String NO_OF_TIMES = "no_of_times";
     public static final String IMAGE= "image";
-
+    public static final String LAT = "lat";
+    public static final String LON = "lon";
 
     @Bind(R.id.title)
     TextView mTitle;
@@ -51,6 +54,9 @@ public class ReminderDetailsFragment extends Fragment implements View.OnClickLis
     @Bind(R.id.imageView)
     ImageView mPreview;
 
+    @Bind(R.id.btn_show_map)
+    Button mShowMap;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +68,8 @@ public class ReminderDetailsFragment extends Fragment implements View.OnClickLis
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.reminder_details_fragment,container,false);
-        ButterKnife.bind(this,view);
+        View view = inflater.inflate(R.layout.reminder_details_fragment, container, false);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -74,9 +80,28 @@ public class ReminderDetailsFragment extends Fragment implements View.OnClickLis
             mTitle.setText(getArguments().getString(TITLE));
             mExDate.setText(getArguments().getString(EX_DATE));
             mNoTimes.setText(getArguments().getString(NO_OF_TIMES));
+            displayLocation();
             String image = getArguments().getString(IMAGE);
             previewImage(image);
             mDelete.setOnClickListener(this);
+        }
+    }
+
+    private void displayLocation (){
+        DecimalFormat decimalFormat  =new DecimalFormat("#.#######");
+        if (getArguments().getDouble(LAT,-1)!=-1 && getArguments().getDouble(LON,-1)!=-1 )
+        mShowMap.setText(decimalFormat.format(getArguments().getDouble(LAT)) + "," + decimalFormat.format(getArguments().getDouble(LON)));
+    }
+
+    @OnClick(R.id.btn_show_map)
+    public void showMap (View v){
+        double lat = getArguments()!=null ? getArguments().getDouble(LAT):-1;
+        double lon = getArguments()!=null ? getArguments().getDouble(LON):-1;
+        if (lat!=-1 && lon!=-1) {
+            Intent intent = new Intent(getActivity(), MapsActivity.class);
+            intent.putExtra(ReminderDetailsFragment.LAT,lat);
+            intent.putExtra(ReminderDetailsFragment.LON,lon);
+            startActivity(intent);
         }
     }
 

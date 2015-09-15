@@ -29,9 +29,9 @@ public class ListProvider  implements RemoteViewsFactory  {
     }
 
     public RealmResults<ReminderBean> getReminders(){
-
+        // i must get new instance from realm
+        // exception : Realm objects can only be accessed on the thread they were created.
         RealmResults<ReminderBean> list = Realm.getInstance(context).where(ReminderBean.class).findAll();
-        String reminderBean = list.get(0).getTitle();
         return list;
     }
 
@@ -79,10 +79,10 @@ public class ListProvider  implements RemoteViewsFactory  {
     public RemoteViews getViewAt(int position) {
         final RemoteViews remoteView = new RemoteViews(
                 context.getPackageName(), R.layout.reminder_row);
-        ReminderBean reminderBean = mData.get(position);
-        remoteView.setTextViewText(R.id.title, "reminderBean.getTitle()");
-        remoteView.setTextViewText(R.id.ex_date," reminderBean.getExDate()");
-        remoteView.setTextViewText(R.id.numoftimes,"reminderBean.getNumberOfTimes()");
+        ReminderBean reminderBean =getReminders().get(position);
+        remoteView.setTextViewText(R.id.title, reminderBean.getTitle());
+        remoteView.setTextViewText(R.id.ex_date,reminderBean.getExDate());
+        remoteView.setTextViewText(R.id.numoftimes,context.getString(R.string.times,reminderBean.getNumberOfTimes()));
 
         return remoteView;
     }

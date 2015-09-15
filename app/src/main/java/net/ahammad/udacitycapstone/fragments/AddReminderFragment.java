@@ -26,12 +26,14 @@ import android.widget.Toast;
 import com.google.android.gms.analytics.Tracker;
 
 import net.ahammad.udacitycapstone.MainApp;
+import net.ahammad.udacitycapstone.MapsActivity;
 import net.ahammad.udacitycapstone.R;
 import net.ahammad.udacitycapstone.util.Database;
 import net.ahammad.udacitycapstone.util.ReminderBean;
 
 import java.io.File;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,11 +41,13 @@ import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by alahammad on 9/4/15.
  */
 public class AddReminderFragment extends Fragment implements View.OnClickListener{
+    public static final int MAP_REQUEST = 200;
     // camera
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     private Uri fileUri;
@@ -68,6 +72,9 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
     @Bind(R.id.imageView)
     ImageView mPreview;
 
+    @Bind(R.id.btn_map)
+    Button mMap;
+
     private DatePickerDialog mDatePicker;
 
     @Override
@@ -81,7 +88,7 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.add_reminder_fragment,container,false);
+        View view =inflater.inflate(R.layout.add_reminder_fragment, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -98,7 +105,20 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
             // will close the app if the device does't have camera
         }
         mExDate.setOnClickListener(this);
+
         setDatePicker();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        double lat = MainApp.lat;
+        double lon = MainApp.lon;
+        if (lat!=0 && lon!=0) {
+            DecimalFormat decimalFormat  =new DecimalFormat("#.#######");
+            mMap.setText(decimalFormat.format(lat) + "," + decimalFormat.format(lon));
+        }
+        Log.d("Hammad", "Lat " + lat);
     }
 
     private boolean isDeviceSupportCamera() {
@@ -112,12 +132,19 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
         }
     }
 
+    @OnClick(R.id.btn_map)
+    public void showMap(View view){
+        Intent intent =new Intent(getActivity(), MapsActivity.class);
+        startActivityForResult(intent, MAP_REQUEST);
+    }
+
+
     @Override
     public void onClick(View v) {
         if (v==mAdd) {
             if (checkEmpty(mTitle) && !TextUtils.isEmpty(mExDate.getText().toString()) && checkEmpty(mNoOfTimes)) {
                 String imagePath = fileUri!=null ? fileUri.getPath() :"";
-                ReminderBean bean = new ReminderBean(imagePath, mTitle.getText().toString(), mExDate.getText().toString(),mNoOfTimes.getText().toString());
+                ReminderBean bean = new ReminderBean( mTitle.getText().toString(), mExDate.getText().toString(),mNoOfTimes.getText().toString(),imagePath,MainApp.lat,MainApp.lon);
                 Database.getInstance(getActivity()).insertReminder(bean);
                 Toast.makeText(getActivity(), R.string.add_success, Toast.LENGTH_SHORT).show();
                 getActivity().getSupportFragmentManager().popBackStack();
@@ -136,6 +163,7 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
             intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
 
             startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+
         }
     }
 

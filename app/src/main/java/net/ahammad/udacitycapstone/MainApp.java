@@ -13,6 +13,7 @@ import io.realm.RealmConfiguration;
  */
 public class MainApp extends Application {
     private Tracker mTracker;
+    public static double lat,lon;
 
     synchronized public Tracker getDefaultTracker() {
         if (mTracker == null) {

@@ -4,7 +4,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/widget_margin"
-        android:background="#55000000">
+        android:background="@color/main_color">
     <ListView
         android:id="@+id/listViewWidget"
         android:layout_width="match_parent"

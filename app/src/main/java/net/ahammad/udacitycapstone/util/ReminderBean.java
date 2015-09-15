@@ -1,7 +1,5 @@
 package net.ahammad.udacitycapstone.util;
 
-import android.widget.TextView;
-
 import io.realm.RealmObject;
 
 /**
@@ -13,12 +11,16 @@ public class ReminderBean  extends RealmObject{
     private String exDate;
     private String numberOfTimes;
     private String imagePath;
+    private double lat=-1;
+    private double lon=-1;
 
-    public ReminderBean(String imagePath, String title, String exDate, String numberOfTimes) {
-        this.imagePath = imagePath;
+    public ReminderBean(String title, String exDate, String numberOfTimes, String imagePath, double lat, double lon) {
         this.title = title;
         this.exDate = exDate;
         this.numberOfTimes = numberOfTimes;
+        this.imagePath = imagePath;
+        this.lat = lat;
+        this.lon = lon;
     }
 
     public ReminderBean() {
@@ -55,5 +57,21 @@ public class ReminderBean  extends RealmObject{
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
     }
 }

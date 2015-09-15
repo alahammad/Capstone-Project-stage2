@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,6 +12,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import net.ahammad.udacitycapstone.fragments.ReminderDetailsFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,8 +44,11 @@ public class MapsActivity extends FragmentActivity {
 
     @OnClick (R.id.save_map)
     public void OnClick(View view){
-        if (mSelectedPos!=null)
-        Toast.makeText(this,"Lat: "+mSelectedPos.latitude+" Long : "+mSelectedPos.longitude,Toast.LENGTH_LONG).show();
+        if (mSelectedPos!=null){
+            MainApp.lat = mSelectedPos.latitude;
+            MainApp.lon = mSelectedPos.longitude;
+            finish();
+        }
     }
 
     private void setUpMapIfNeeded() {
@@ -92,5 +96,16 @@ public class MapsActivity extends FragmentActivity {
             @Override
             public void onMarkerDrag(Marker arg0) {}
         });
+        addMarker ();
+    }
+
+    private void addMarker (){
+       double lat= getIntent().getDoubleExtra(ReminderDetailsFragment.LAT,-1);
+       double lon = getIntent().getDoubleExtra(ReminderDetailsFragment.LON,-1);
+       if (lat!=-1 && lon!=-1){
+           mMap.addMarker(new MarkerOptions()
+                   .position(new LatLng(lat, lon))
+                   .title(getString(R.string.pharmacy_location)));
+       }
     }
 }

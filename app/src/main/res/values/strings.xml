@@ -13,6 +13,9 @@
    <string name="splash_txt">Medicine Reminder</string>
    <string name="my_location">My location</string>
    <string name="save">Save</string>
+   <string name="select_pharmacy">Select Pharmacy</string>
+   <string name="show_map">Show Pharmacy map</string>
+   <string name="pharmacy_location">Pharmacy Location</string>
    <!-- hints -->
    <string name="name">Medicine name</string>
    <string name="ex_date">Expiry date</string>
