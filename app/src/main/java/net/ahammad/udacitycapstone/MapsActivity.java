@@ -78,7 +78,7 @@ public class MapsActivity extends FragmentActivity {
                 if (mCurrentPos==null) {
                     mCurrentPos = mSelectedPos= new LatLng(location.getLatitude(), location.getLongitude());
                     mMap.addMarker(new MarkerOptions().position(mCurrentPos).title(getString(R.string.my_location))).setDraggable(true);
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mCurrentPos,16));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mCurrentPos,12));
                 }
             }
         });
