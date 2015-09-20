@@ -1,7 +1,10 @@
 package net.ahammad.udacitycapstone.fragments;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -28,6 +31,7 @@ import com.google.android.gms.analytics.Tracker;
 import net.ahammad.udacitycapstone.MainApp;
 import net.ahammad.udacitycapstone.MapsActivity;
 import net.ahammad.udacitycapstone.R;
+import net.ahammad.udacitycapstone.util.AlarmReceiver;
 import net.ahammad.udacitycapstone.util.Database;
 import net.ahammad.udacitycapstone.util.ReminderBean;
 
@@ -74,6 +78,11 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
 
     @Bind(R.id.btn_map)
     Button mMap;
+
+
+    private PendingIntent pendingIntent;
+    private AlarmManager manager;
+
 
     private DatePickerDialog mDatePicker;
 
@@ -139,15 +148,27 @@ public class AddReminderFragment extends Fragment implements View.OnClickListene
     }
 
 
+    private void startAlarm (){
+        Intent alarmIntent = new Intent(getActivity(), AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, alarmIntent, 0);
+
+        manager = (AlarmManager)getActivity().getSystemService(Context.ALARM_SERVICE);
+        int interval = 1000*60*60*8;// each 8 hours
+
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
+    }
+
     @Override
     public void onClick(View v) {
         if (v==mAdd) {
             if (checkEmpty(mTitle) && !TextUtils.isEmpty(mExDate.getText().toString()) && checkEmpty(mNoOfTimes)) {
                 String imagePath = fileUri!=null ? fileUri.getPath() :"";
-                ReminderBean bean = new ReminderBean( mTitle.getText().toString(), mExDate.getText().toString(),mNoOfTimes.getText().toString(),imagePath,MainApp.lat,MainApp.lon);
+                ReminderBean bean = new ReminderBean(mTitle.getText().toString(), mExDate.getText().toString(),mNoOfTimes.getText().toString(),imagePath,MainApp.lat,MainApp.lon);
                 Database.getInstance(getActivity()).insertReminder(bean);
                 Toast.makeText(getActivity(), R.string.add_success, Toast.LENGTH_SHORT).show();
+                startAlarm ();
                 getActivity().getSupportFragmentManager().popBackStack();
+
             }else{
                 Toast.makeText(getActivity(),R.string.empty,Toast.LENGTH_LONG).show();
 

@@ -17,6 +17,10 @@
    <string name="show_map">Show Pharmacy map</string>
    <string name="pharmacy_location">Pharmacy Location</string>
    <string name="share">Share</string>
+
+   <!-- notification -->
+   <string name="notification_title">Medicine Time</string>
+   <string name="notification_content">It's time for your medicine</string>
    <!-- hints -->
    <string name="name">Medicine name</string>
    <string name="ex_date">Expiry date</string>
