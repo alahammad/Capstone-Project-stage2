@@ -6,7 +6,7 @@ android {
         config {
             keyAlias 'alahammad'
             keyPassword 'capstone'
-            storeFile file('E:/Android/Projects/Udacity-capestone/Capstone-Project-stage2/keystore.jks')
+            storeFile file('./keystore.jks')
             storePassword 'capstone'
         }
     }
