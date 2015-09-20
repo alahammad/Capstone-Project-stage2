@@ -6,7 +6,13 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.ShareActionProvider;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -57,9 +63,12 @@ public class ReminderDetailsFragment extends Fragment implements View.OnClickLis
     @Bind(R.id.btn_show_map)
     Button mShowMap;
 
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         MainApp application = (MainApp) getActivity().getApplication();
         Tracker mTracker = application.getDefaultTracker();
         mTracker.setScreenName("Reminder details");
@@ -121,4 +130,33 @@ public class ReminderDetailsFragment extends Fragment implements View.OnClickLis
         Toast.makeText(getActivity(), R.string.deleted, Toast.LENGTH_SHORT).show();
         getActivity().getSupportFragmentManager().popBackStack();
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.details_menu, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.menu_item_share);
+
+        ShareActionProvider mShareActionProvider = new ShareActionProvider(getActivity());
+        MenuItemCompat.setActionProvider(menuItem, mShareActionProvider);
+
+        if (mShareActionProvider != null) {
+            mShareActionProvider.setShareIntent(createShareForecastIntent());
+        } else {
+            Log.d("Reminder", "Share action provider is null");
+        }
+    }
+
+
+
+    private Intent createShareForecastIntent() {
+        String txt = String.format("Reminder: %s, date: %s, Times in day :%s",mTitle.getText().toString(),mNoTimes.getText().toString(),mExDate.getText().toString());
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT,txt);
+        return shareIntent;
+    }
+
 }

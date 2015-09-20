@@ -74,25 +74,38 @@
         android:layout_alignEnd="@+id/btn_show_map"
         android:layout_alignLeft="@+id/btn_show_map"
         android:layout_alignStart="@+id/btn_show_map"
-        android:layout_above="@+id/delete"
+        android:layout_above="@+id/delete_layout"
         android:layout_marginBottom="10dp" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/delete"
-        android:id="@+id/delete"
-        android:textSize="18sp"
-        android:contentDescription="@string/delete"
-        android:layout_gravity="center_horizontal|bottom|end"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent" android:layout_gravity="center_horizontal|bottom|end"
         android:layout_alignParentBottom="true"
+        android:id="@+id/delete_layout"
         android:layout_marginBottom="20dp"
-        android:textColor="@android:color/white"
-        android:background="@drawable/delete_button"
         android:layout_alignRight="@+id/imageView"
         android:layout_alignEnd="@+id/imageView"
         android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView" />
+        android:layout_alignStart="@+id/imageView"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delete"
+            android:id="@+id/delete"
+            android:textSize="18sp"
+            android:contentDescription="@string/delete"
+            android:layout_gravity="center_horizontal|bottom|end"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/delete_button"
+           />
+
+    </LinearLayout>
+
+
 
     <Button
         android:layout_width="match_parent"

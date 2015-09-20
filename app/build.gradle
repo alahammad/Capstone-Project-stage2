@@ -5,16 +5,16 @@ android {
     signingConfigs {
         config {
             keyAlias 'alahammad'
-            keyPassword 'doom2008'
-            storeFile file('/Users/alahammad/Data/Projects/Android/keystore_New.jks')
-            storePassword 'doom2008'
+            keyPassword 'capstone'
+            storeFile file('E:/Android/Projects/Udacity-capestone/Capstone-Project-stage2/keystore.jks')
+            storePassword 'capstone'
         }
     }
     compileSdkVersion 22
     buildToolsVersion '22.0.1'
     defaultConfig {
         applicationId "net.ahammad.udacitycapstone"
-        minSdkVersion 11
+        minSdkVersion 19
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -40,8 +40,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.android.support:support-v4:22.2.1'
     compile 'com.android.support:design:22.2.1'

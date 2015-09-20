@@ -23,7 +23,6 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity{
 
-    Fragment mCurrentFragment;
 
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
@@ -40,7 +39,6 @@ public class MainActivity extends AppCompatActivity{
 
     public void changeFragment (Fragment fragment,boolean addToBackStack) {
         // add condition to hidden add button
-        mCurrentFragment = fragment;
         FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment,fragment.getClass().getName());
 
